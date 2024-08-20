@@ -11,12 +11,16 @@ import {
 import { ResizeMode } from "expo-av";
 import VideoPlayer from "expo-video-player";
 import EmojiPicker, { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
+import Reaction, { ReactionProps } from "./Reaction";
 
-interface Props {
-  //reactions: [Reaction]
+interface PerformanceProps {
+  reactions: ReactionProps[];
   videoSource: string;
 }
-export const Performance = ({ videoSource }: Props) => {
+export default function Performance({
+  reactions,
+  videoSource,
+}: PerformanceProps) {
   const [result, setResult] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handlePick = (emoji: EmojiType) => {
@@ -36,7 +40,7 @@ export const Performance = ({ videoSource }: Props) => {
           },
         }}
       />
-      <TouchableOpacity onPress={ ()=> setIsModalOpen(true)}>
+      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
         <Text>Open Emoji</Text>
       </TouchableOpacity>
       <EmojiPicker
@@ -46,7 +50,7 @@ export const Performance = ({ videoSource }: Props) => {
       />
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   contentContainer: {

@@ -1,14 +1,18 @@
 /* Home Screen which will display a list of videos that the user can click on and then watch */
 
 //Import statements
-import { Text, Button, StyleSheet } from "react-native";
+import { Text, Button, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
-import { VideoView, useVideoPlayer } from "expo-video";
-import Video from "./components/video";
+import { Link, useRouter } from "expo-router";
+import { ResizeMode } from "expo-av";
+import VideoPlayer from "expo-video-player";
+import Performance from "./components/Performance";
+//import Video from "./components/video";
+import ReactionPreview from "./ReactionPreview";
 
 // returns two sections, the header and the body, header is fixed in place
 export default function Index() {
+  const router = useRouter();
   return (
     <>
       <SafeAreaView style={styles.header}>
@@ -16,11 +20,25 @@ export default function Index() {
       </SafeAreaView>
 
       <SafeAreaView style={styles.body}>
-        <Link href="/reactions" asChild>
-          <Button title="Reactions"></Button>
-        </Link>
+        <ScrollView>
+          <Performance
+            reactions={[]}
+            videoSource="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          />
+          <Button
+            title="Reactions"
+            onPress={() => {
+              router.push("./camera");
+            }}
+          ></Button>
 
-        <Video></Video>
+          <Button
+            title="ReactionPreview"
+            onPress={() => {
+              router.push("./ReactionPreview");
+            }}
+          ></Button>
+        </ScrollView>
       </SafeAreaView>
     </>
   );

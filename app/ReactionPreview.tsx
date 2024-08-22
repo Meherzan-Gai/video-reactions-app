@@ -17,7 +17,7 @@ export default function ReactionPreview() {
   const reactionSrc = useLocalSearchParams().reactionSrc as string;
 
   const handlePicture = function () {
-    router.push({pathname: "/", params: {re}}
+    router.push({pathname: "/"}
 
     );
     //navigate to home screen

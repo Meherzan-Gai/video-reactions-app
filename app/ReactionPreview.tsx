@@ -1,20 +1,38 @@
-import { useRouter } from "expo-router";
-import { Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import { useState } from "react";
+import {
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Switch,
+} from "react-native";
 
-interface Props {
+interface ReactionPreviewProps {
   reactionSrc: string;
 }
-
-export default function ReactionPreview({ reactionSrc }: Props) {
+export default function ReactionPreview() {
+  const [isPrivate, setIsPrivate] = useState(true);
   const router = useRouter();
+  const reactionSrc = useLocalSearchParams().reactionSrc as string;
+
   const handlePicture = function () {
-    router.push("./index");
+    router.push({pathname: "/", params: {re}}
+
+    );
     //navigate to home screen
     //push reaction
-  }
+  };
+
+  const togglePrivacy = function (switchVal : boolean) {
+    setIsPrivate(switchVal);
+  };
   return (
     <>
-      <Image src={reactionSrc}></Image>
+      <Image source={{ uri: reactionSrc }} style={styles.image}></Image>
+      <Text>{reactionSrc}</Text>
+      <Text>{isPrivate === true ? "Private" : "Public"}</Text>
+      <Switch value={isPrivate} onValueChange={togglePrivacy}/>
       <TouchableOpacity onPress={handlePicture}>
         <Text> Yes </Text>
       </TouchableOpacity>
@@ -27,6 +45,7 @@ export default function ReactionPreview({ reactionSrc }: Props) {
 
 const styles = StyleSheet.create({
   image: {
-    width: 25,
+    width: 250,
+    height: 332,
   },
 });

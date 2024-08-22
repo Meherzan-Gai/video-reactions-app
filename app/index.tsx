@@ -35,7 +35,14 @@ export default function Index() {
           <Button
             title="ReactionPreview"
             onPress={() => {
-              router.push("./ReactionPreview");
+              //router.push("./ReactionPreview");
+              router.push({
+                pathname: "/ReactionPreview",
+                params: {
+                  reactionSrc:
+                    'https://reactnative.dev/img/tiny_logo.png',
+                },
+              });
             }}
           ></Button>
         </ScrollView>
